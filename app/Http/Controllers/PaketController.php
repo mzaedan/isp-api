@@ -10,41 +10,26 @@ class PaketController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function getAllPaket()
     {
         $paket = Paket::all();
-        return response()->json(['status' => 'success', 'data' => $paket]);
+        if ($paket) {
+            return response()->json(['code' => 0, 'info' => 'OK', 'data' => $paket]);
+        } else {
+            return response()->json(['code' => 1, 'info' => 'Error', 'data' => []]);
+        }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function loadPaketListJumlahPenjualanTerbanyak(Request $request)
     {
-        //
+        $orders = Paket::orderBy('jumlah_penjualan', 'desc')->get();
+
+        return response()->json([
+            'code' => 0,
+            'info' => 'OK',
+            'data' => $orders
+        ]);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
+    
 }

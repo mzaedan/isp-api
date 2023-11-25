@@ -10,41 +10,34 @@ class TeknisiController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function loadData(Request $request)
     {
-        $teknisi = Teknisi::all();
-        return response()->json(['status' => 'success', 'data' => $teknisi]);
+        $data = json_decode($request->getContent(), true);
+        $id = $data['id'] ?? null;
+        
+        if ($id) {
+            $teknisi = Teknisi::where('id', $id)->first();
+        } else {
+            $teknisi = Teknisi::all();
+        }
+        $response = [
+            'code' => 0,
+            'info' => 'OK',
+            'data' => $teknisi,
+        ];
+        return response()->json($response);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function loadTeknisiListTotalHandling(Request $request)
     {
-        //
+        $orders = Teknisi::orderBy('total_handling', 'desc')->get();
+
+        return response()->json([
+            'code' => 0,
+            'info' => 'OK',
+            'data' => $orders
+        ]);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
+   
 }

@@ -4,6 +4,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\TeknisiController;
 use App\Http\Controllers\PaketController;
 use App\Models\Paket;
+use App\Models\Teknisi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,13 +23,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('teknisi/index', [TeknisiController::class, 'index']);
+Route::get('paket/get-paket', [PaketController::class, 'getAllPaket']); //API Get Package
+
+Route::get('order/load-order-list-status', [OrderController::class, 'loadOrderListStatus']); //API load list data order + terdapat kondisional sorting desc by status_id
+
+Route::get('paket/load-paket-jumlah-terbanyak', [PaketController::class, 'loadPaketListJumlahPenjualanTerbanyak']);
+
+Route::get('teknisi/load-teknisi-total-handling', [TeknisiController::class, 'loadTeknisiListTotalHandling']);
 
 
-Route::get('order/index', [OrderController::class, 'index']);
-Route::get('order/store', [OrderController::class, 'store']);
-Route::get('order/load-order-list-status', [OrderController::class, 'loadOrderListStatus']);
-Route::get('order/load-order-list-paket', [OrderController::class, 'loadOrderListPaket']);
 
 
-Route::get('paket/index', [PaketController::class, 'index']);
