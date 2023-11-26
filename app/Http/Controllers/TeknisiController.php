@@ -39,5 +39,36 @@ class TeknisiController extends Controller
         ]);
     }
 
+    public function loadDataTeknisi(Request $request)
+    {
+        // Cek apakah terdapat input id
+        if ($request->has('id')) {
+            // Jika terdapat input id, tampilkan data teknisi berdasarkan id
+            $teknisi = Teknisi::find($request->id);
+            if ($teknisi) {
+                $data = $teknisi;
+                $code = 0;
+                $info = "OK";
+            } else {
+                $data = [];
+                $code = 1;
+                $info = "Data teknisi tidak ditemukan";
+            }
+        } else {
+            // Jika tidak terdapat input id, tampilkan semua data teknisi
+            $teknisi = Teknisi::all();
+            $data = $teknisi;
+            $code = 0;
+            $info = "OK";
+        }
+
+        // Kirim response berupa JSON
+        return response()->json([
+            'code' => $code,
+            'info' => $info,
+            'data' => $data
+        ]);
+    }
+
    
 }
