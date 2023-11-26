@@ -29,8 +29,8 @@ Route::get('paket/get-paket', [PaketController::class, 'getAllPaket']); //API Ge
 
 Route::get('order/load-order-list-status', [OrderController::class, 'loadOrderListStatus']); //API load list data order + terdapat kondisional sorting desc by status_id
 
-Route::post('order/store', [OrderController::class, 'store']);
-Route::put('order/update/{id}', [OrderController::class, 'update']);
+Route::post('order/store', [OrderController::class, 'store']); //API Submit/save order
+Route::put('order/update/{id}', [OrderController::class, 'update']); //API Update data order
 Route::get('order/load-data-order', [OrderController::class, 'loadDataOrder']); //API load data order
 
 
