@@ -30,13 +30,14 @@ Route::get('paket/get-paket', [PaketController::class, 'getAllPaket']); //API Ge
 Route::get('order/load-order-list-status', [OrderController::class, 'loadOrderListStatus']); //API load list data order + terdapat kondisional sorting desc by status_id
 
 Route::post('order/store', [OrderController::class, 'store']);
-Route::get('order/load-data-order', [OrderController::class, 'loadDataOrder']);
+Route::put('order/update/{id}', [OrderController::class, 'update']);
+Route::get('order/load-data-order', [OrderController::class, 'loadDataOrder']); //API load data order
 
 
-Route::get('paket/load-paket-jumlah-terbanyak', [PaketController::class, 'loadPaketListJumlahPenjualanTerbanyak']);
+Route::get('paket/load-paket-jumlah-terbanyak', [PaketController::class, 'loadPaketListJumlahPenjualanTerbanyak']); //API load list data paket sort by jumlah terbanyak (desc)
 
-Route::get('teknisi/load-teknisi-total-handling', [TeknisiController::class, 'loadTeknisiListTotalHandling']);
-Route::get('teknisi/load-data-teknisi', [TeknisiController::class, 'loadDataTeknisi']);
+Route::get('teknisi/load-teknisi-total-handling', [TeknisiController::class, 'loadTeknisiListTotalHandling']); // API load list data teknisi sort by jumlah terbanyak (desc) 
+Route::get('teknisi/load-data-teknisi', [TeknisiController::class, 'loadDataTeknisi']); //API load data teknisi
 
 Route::post('auth/login', [AuthController::class, 'login']);
 Route::post('auth/logout', [AuthController::class, 'logout']);
